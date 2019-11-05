@@ -25,6 +25,7 @@ The Mentor Engine is a set of services running on a [Kubernetes][K8] cluster tha
 
 ```mermaid
 graph TD;
+    I["🌎"] --- MI
     MI[Mentor Interface] --- DC[Demo Central];
     DC --- DD[Demo Downloader];
     DC --- DFW[Demo File Worker];
