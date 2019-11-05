@@ -48,4 +48,8 @@ graph TD;
     class SDB,MDB db;
 ```
 
+## Further Reading:
+
+- [RabbitMQ on GCP](https://github.com/GoogleCloudPlatform/click-to-deploy/blob/master/k8s/rabbitmq/README.md)
+
 [K8]: https://kubernetes.io/
