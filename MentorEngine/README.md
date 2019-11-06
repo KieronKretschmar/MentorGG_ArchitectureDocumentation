@@ -8,7 +8,7 @@ The Mentor Engine is a set of services running on a [Kubernetes][K8] cluster tha
     REST API exposed to the internet via an Ingress, providing authentication services and access to the Mentor Engine.
 - CS:GO:
     - **Demo Central**
-        Orchastrate demo acquisition and analysis.
+        Orchestrate demo acquisition and analysis.
     - **Demo Downloader**
         Download demos either from URL of file stream.
     - **Demo File Worker**
