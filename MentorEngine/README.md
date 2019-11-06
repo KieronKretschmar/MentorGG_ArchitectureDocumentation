@@ -5,7 +5,7 @@ The Mentor Engine is a set of services running on a [Kubernetes][K8] cluster tha
 ## Service Outline
 
 - **Mentor Interface**
-    REST API exposed to the internet via an Ingress, providing authentication services and access to the Mentor Engine.
+    REST API exposed to the internet via an Ingress, providing authentication services and access to the Mentor Engine, and aggregates data from different sources.
 - CS:GO:
     - **Demo Central**
         Orchestrate demo acquisition and analysis.
@@ -17,9 +17,6 @@ The Mentor Engine is a set of services running on a [Kubernetes][K8] cluster tha
         Store, retreive and compute match data.
     - **Situtation Operator**
         Store, retreive and compute misplay data.
-    - **Combiner**
-        Combine data sources.
-
 
 ## Information Flow
 
@@ -35,10 +32,7 @@ graph TD;
     
 
     MI --- MDBI[Match DBI];
-    MI --- C[Combiner];
     MI --- SO[Situtation Operator];
-    C --- MDBI;
-    C --- SO;
     SO --- SDB((Situtation DB))
     MDBI --- MDB((Match DB))
 
@@ -51,5 +45,6 @@ graph TD;
 ## Further Reading:
 
 - [RabbitMQ on GCP](https://github.com/GoogleCloudPlatform/click-to-deploy/blob/master/k8s/rabbitmq/README.md)
+- [Design Patterns for Microservices](https://dzone.com/articles/design-patterns-for-microservices)
 
 [K8]: https://kubernetes.io/
