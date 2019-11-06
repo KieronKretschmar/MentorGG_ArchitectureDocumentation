@@ -1,6 +1,6 @@
 # Mentor Engine
 
-The Mentor Engine is a set of services running on a [Kubernetes][K8] cluster that perform analytics on game replays.
+The Mentor Engine is a set of services running on a [Kubernetes][K8] cluster that make up the MENTOR.GG backend.
 
 ## Service Outline
 
@@ -10,13 +10,13 @@ The Mentor Engine is a set of services running on a [Kubernetes][K8] cluster tha
     - **Demo Central**
         Orchestrate demo acquisition and analysis.
     - **Demo Downloader**
-        Download demos either from URL of file stream.
+        Download demos either from URL or file stream.
     - **Demo File Worker**
-        Obtain match data from a demo file and enriches the result.
+        Obtain raw match data from a demo file and enriches the result.
     - **Match DBI**
-        Store, retreive and compute match data.
-    - **Situtation Operator**
-        Store, retreive and compute misplay data.
+        Store and retrieve match data.
+    - **Situation Operator**
+        Store, retrieve and compute situation data.
 
 ## Information Flow
 
@@ -24,11 +24,11 @@ The Mentor Engine is a set of services running on a [Kubernetes][K8] cluster tha
 graph TD;
     I["🌎"] --- MI
     MI[Mentor Interface] --- DC[Demo Central];
-    DC --- DD[Demo Downloader];
-    DC --- DFW[Demo File Worker];
-    DFW --- RMQ["🐰 AMQP"];
-    RMQ --- MDBI;
-    RMQ --- SO;
+    DC -.- DD[Demo Downloader];
+    DC -.- DFW[Demo File Worker];
+    DFW -.- RMQ["🐰 Fanout"];
+    RMQ -.- MDBI;
+    RMQ -.- SO;
     
 
     MI --- MDBI[Match DBI];
