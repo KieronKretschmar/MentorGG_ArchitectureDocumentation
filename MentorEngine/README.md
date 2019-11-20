@@ -1,21 +1,21 @@
-# Mentor Engine
+# MentorEngine
 
-The Mentor Engine is a set of services running on a [Kubernetes][K8] cluster that make up the MENTOR.GG backend.
+MentorEngine is a set of services running on a [Kubernetes][K8] cluster that make up the MENTOR.GG backend.
 
 ## Service Outline
 
-- **Mentor Interface**
+- **MentorInterface**
     REST API exposed to the internet via an Ingress, providing authentication services and access to the Mentor Engine, and aggregates data from different sources.
 - CS:GO:
-    - **Demo Central**
+    - **DemoCentral**
         Orchestrate demo acquisition and analysis.
-    - **Demo Downloader**
+    - **DemoDownloader**
         Download demos either from URL or file stream.
-    - **Demo File Worker**
+    - **DemoFile Worker**
         Obtain raw match data from a demo file and enriches the result.
-    - **Match DBI**
+    - **MatchDBI**
         Store and retrieve match data.
-    - **Situation Operator**
+    - **SituationOperator**
         Store, retrieve and compute situation data.
 
 ## Information Flow
@@ -23,23 +23,41 @@ The Mentor Engine is a set of services running on a [Kubernetes][K8] cluster tha
 ```mermaid
 graph TD;
     I["🌎"] --- MI
-    MI[Mentor Interface] --- DC[Demo Central];
-    DC -.- DD[Demo Downloader];
-    DC -.- DFW[Demo File Worker];
+    MI --- UDB((UserDB));
+    
+    MI --- SUDBI(SteamUserDBI);
+    SUDBI --- SUDB((SteamUserDB));
+    SUDBI --- SUDG[SteamUserDataGatherer];
+    
+    MI --- SCO[SharingCodeGatherer];
+    SCO --- SWC[SteamworksConnection];
+    SCO --- DC;
+    
+    MI --- FG[FaceitGatherer];
+    FG --- DC;
+    
+    
+    MI --- CDBI[ConfigurationDBI];
+    CDBI --- CDB((ConfigurationDB));
+    
+    MI[MentorInterface] --- DC[DemoCentral];
+    DC -.- DD[DemoDownloader];
+    DC -.- DFW[DemoFileWorker];
     DFW -.- RMQ["🐰 Fanout"];
     RMQ -.- MDBI;
     RMQ -.- SO;
     
+    DFW --- CDBI;
 
-    MI --- MDBI[Match DBI];
-    MI --- SO[Situtation Operator];
-    SO --- SDB((Situtation DB))
-    MDBI --- MDB((Match DB))
+    MI --- MDBI[MatchDBI];
+    MI --- SO[SituationOperator];
+    SO --- SDB((SituationDB));
+    MDBI --- MDB((MatchDB));
 
     classDef db fill:white;
     classDef queue fill:pink;
     class RMQ queue;
-    class SDB,MDB db;
+    class UDB,SUDB,CDB,SDB,MDB db;
 ```
 
 ## Further Reading:
