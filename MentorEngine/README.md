@@ -11,7 +11,7 @@ MentorEngine is a set of services running on a [Kubernetes][K8] cluster that mak
         Orchestrate demo acquisition and analysis.
     - **DemoDownloader**
         Download demos either from URL or file stream.
-    - **DemoFile Worker**
+    - **DemoFileWorker**
         Obtain raw match data from a demo file and enriches the result.
     - **MatchDBI**
         Store and retrieve match data.
@@ -38,7 +38,6 @@ graph TD;
     
     
     MI --- CDBI[ConfigurationDBI];
-    CDBI --- CDB((ConfigurationDB));
     
     MI[MentorInterface] --- DC[DemoCentral];
     DC -.- DD[DemoDownloader];
@@ -47,8 +46,9 @@ graph TD;
     RMQ -.- MDBI;
     RMQ -.- SO;
     
-    DFW --- CDBI;
+    CDBI --- DFW;
 
+    CDBI --- CDB((ConfigurationDB));
     MI --- MDBI[MatchDBI];
     MI --- SO[SituationOperator];
     SO --- SDB((SituationDB));
