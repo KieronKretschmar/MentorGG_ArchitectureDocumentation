@@ -16,7 +16,15 @@ MentorEngine is a set of services running on a [Kubernetes][K8] cluster that mak
     - **MatchDBI**
         Store and retrieve match data.
     - **SituationOperator**
-        Store, retrieve and compute situation data.
+        Store, retrieve and compute situation data, e.g. misplays.
+    - **FaceitMatchGatherer**
+        Poll Faceit API for new matches.
+    - **SharingCodeGatherer** 
+        Poll Steam SharingCode API for new matches.
+    - **ConfigurationDBI**
+        Provide configuration data to other services (e.g. Equipment, Ingame2Px conversion parameters).
+    - **SteamUserProjects**
+        Provide info about steam users.
 
 ## Information Flow
 
@@ -31,10 +39,10 @@ graph TD;
     
     MI --- SCO[SharingCodeGatherer];
     SCO --- SWC[SteamworksConnection];
-    SCO --- DC;
+    SCO -.- DC;
     
-    MI --- FG[FaceitGatherer];
-    FG --- DC;
+    MI --- FG[FaceitMatchGatherer];
+    FG -.- DC;
     
     
     MI --- CDBI[ConfigurationDBI];
@@ -42,9 +50,9 @@ graph TD;
     MI[MentorInterface] --- DC[DemoCentral];
     DC -.- DD[DemoDownloader];
     DC -.- DFW[DemoFileWorker];
-    DFW -.- RMQ["🐰 Fanout"];
-    RMQ -.- MDBI;
-    RMQ -.- SO;
+    DFW -.- RFO["🐰 Fanout"];
+    RFO -.- MDBI;
+    RFO -.- SO;
     
     CDBI --- DFW;
 
@@ -54,10 +62,27 @@ graph TD;
     SO --- SDB((SituationDB));
     MDBI --- MDB((MatchDB));
 
+    RC["🐰 RabbitMQCluster"];
+
     classDef db fill:white;
     classDef queue fill:pink;
-    class RMQ queue;
+    class RFO queue;
     class UDB,SUDB,CDB,SDB,MDB db;
+
+    click MI,UDB "https://gitlab.com/mentorgg/engine/mentor-interface";
+    click SUDBI,SUDB,SUDG "https://gitlab.com/mentorgg/engine/steamuserprojects";
+    click SCO,SWC "https://gitlab.com/mentorgg/csgo/sharingcodeprojects";
+    click CDBI,CDB "https://gitlab.com/mentorgg/csgo/configurationdbi";
+    click DC "https://gitlab.com/mentorgg/csgo/democentral";
+    click FG "https://gitlab.com/mentorgg/csgo/faceitmatchgatherer";
+    click DFW "https://gitlab.com/mentorgg/csgo/demofileworker";
+    click DD "https://gitlab.com/mentorgg/csgo/demodownloader";
+    click MDBI,MDB "https://gitlab.com/mentorgg/csgo/matchdbi";
+    click RC,RFO "https://gitlab.com/mentorgg/engine/rabbitmqcluster";
+    click SO,SDB "https://gitlab.com/mentorgg/csgo/situationsoperator"
+
+
+    
 ```
 
 ## Publishing
