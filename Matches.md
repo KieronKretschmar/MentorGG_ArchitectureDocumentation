@@ -5,9 +5,10 @@ Collection of information regarding the processing and storage of Matches.
 
 ### Terminology
 
-- *Match* : A single Counter Strike: Global Offensive considering of multiple rounds.
-- *MatchDataSet* : A serialized representation of a *Match*.
-- *MatchDB* : A single, central datastore containing *MatchDataSets*
+- *Match* : A single Counter Strike: Global Offensive match consisting of multiple rounds.
+- *MatchDataSet* : A representation of a *Match*.
+- *MatchDB* : A datastore containing *MatchDataSets*.
+- *CentralMatchDB* : The central singleton implementation of *MatchDB*.
 
 ## MatchDBI
 MatchDBI provides a REST interface for storage and retrieval of match data.
