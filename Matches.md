@@ -1,14 +1,35 @@
- # Matches
+# Matches
 
 Collection of information regarding the processing and storage of Matches.
 
-
 ### Terminology
 
+- *Demo*: A file produced by CS:GO containing raw reply data of a match.
 - *Match* : A single Counter Strike: Global Offensive match consisting of multiple rounds.
 - *MatchDataSet* : A representation of a *Match*.
 - *MatchDB* : A datastore containing *MatchDataSets*.
 - *CentralMatchDB* : The central singleton implementation of *MatchDB*.
+
+# Demo => MatchDataSet
+
+The communication process of extracting Match Data from a Demo.
+
+```mermaid
+
+    graph LR
+    
+    DC[DemoCentral] -. "[ DemoFileLocation, MatchID ]" .-> DFW[DemoFileWorker]
+    DFW -. "[MatchID, IsSuccess ]" .-> DC
+    
+    DFW -. "[ MatchDataSet ]" .-> FO{AQMP Fanout}
+    FO -.-> SO[SitutationOperator]
+    FO -.-> CMDBI[CentralMatchDBI]
+    
+    CMDBI -. "[MatchID, isSuccess ]".-> DC
+
+
+```
+
 
 ## MatchDBI
 MatchDBI provides a REST interface for storage and retrieval of match data.
