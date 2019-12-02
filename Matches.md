@@ -19,7 +19,6 @@ MatchDBI provides a REST interface for storage and retrieval of match data.
     - If not provided, MatchDBI will create an InMemory database.
 
 ## MatchHopper
-
 Match hopper is responsible for consuming messages containing, or referencing MatchDataSets from a Rabbit Queue.
 
 ### External Configuration
