@@ -4,7 +4,7 @@ Collection of information regarding the processing and storage of Matches.
 
 ### Terminology
 
-- *Demo*: A file produced by CS:GO containing raw reply data of a match.
+- *Demo*: A .dem file produced by CS:GO containing logged replay data of a match.
 - *Match* : A single Counter Strike: Global Offensive match consisting of multiple rounds.
 - *MatchDataSet* : A representation of a *Match*.
 - *MatchDB* : A datastore containing *MatchDataSets*.
