@@ -104,7 +104,7 @@ sequenceDiagram
 4. MatchDBI responds to request from step 3. with status (success or failure).
 5. MatchHopper sends POST containing MatchID to SituationOperator.
 6. SituationOperator makes relevant calls to MatchDBI.
-7. SituationOperator responses to request from step 5. with status (success of failure)
+7. SituationOperator responds to request from step 5. with status (success or failure)
 5. MatchHopper acknowledges the consumption and publishes status to the reply queue.
 
 ## Publishing process
