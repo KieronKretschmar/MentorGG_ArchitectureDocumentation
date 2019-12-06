@@ -89,7 +89,7 @@ sequenceDiagram
     activate MH
     MDBI->>-MH: OK
     MH->>+SO: POST [MatchID]
-    SO->>+MDBI: GET /kills/[MATCHID]
+    SO->>+MDBI: GET [MATCHID]
     MDBI->>-SO: [DATA]
     SO->>-MH: OK
     deactivate MH
