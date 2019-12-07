@@ -44,6 +44,7 @@ Match hopper is responsible for consuming messages containing, or referencing Ma
 
 ### External Configuration
 - Queue Name to consume[*] - eg. `DFW_MDBI`
+- Queue Name to reply to[*]
 - Endpoint for message consumption[*] - Where to `PUT` the message contents. eg. `localost/match/`
 - Endpoint to send a notifcation - Where to `POST` after a successful `PUT`.
 
