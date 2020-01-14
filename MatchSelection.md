@@ -4,7 +4,7 @@ Analyses displayed in the webapp usually depend on data of one or multiple match
 ## Information Flow
 
 ### Summary
-`MatchSelectionHelper` supplies `WebApp` with the data it needs to compute the required Matchids client-side. It will then request data specifically for these MatchIds from `MatchRetriever` or `TeamMatchRetriever`, respectively.
+`MatchSelectionHelper` supplies `WebApp` with the data it needs to compute the required Matchids client-side. The `WebApp` then request data specifically for these MatchIds from `MatchRetriever` or `TeamMatchRetriever`, respectively.
 
 ### Terminology
 - `MMH`: MetaMatchHistory, a list where each entry contains metadata about a match played by the user/team. Each matches metadata contains properties like 
