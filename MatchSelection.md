@@ -3,6 +3,9 @@ Analyses displayed in the webapp usually depend on data of one or multiple match
 
 ## Information Flow
 
+### Summary
+`MatchSelectionHelper` supplies `WebApp` with the data it needs to compute the required Matchids client-side. It will then request data specifically for these MatchIds from `MatchRetriever` or `TeamMatchRetriever`, respectively.
+
 ### Terminology
 - `MMH`: MetaMatchHistory, a list where each entry contains metadata about a match played by the user/team. Each matches metadata contains properties like 
 `{MatchId, Source, MatchDate, Map, IsIgnored, IsFavorite }`
@@ -44,10 +47,11 @@ sequenceDiagram
 ```
  
 
-## Advantages of giving the webapp the responsibility of computing the matchIds instead of a backend service
+## Discussion / Reasoning for this design
+### Advantages of giving the webapp the responsibility of computing the matchIds instead of a backend service
 - Cheaper and more scaleable, since operations are carried out on users' hardware.
 - Easier to maintain, as filter and selection behavior can be extended and adapted easily by only making changes to the webapp.
 - The user's selection and the matchIds are always in sync (no room for bugs where data of other matches than the user expected is returned).
 
-## Disadvantages
+### Disadvantages
 - More traffic (60kb to 60mb per visit, depending on how well you do math)
