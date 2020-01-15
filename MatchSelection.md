@@ -62,7 +62,7 @@ sequenceDiagram
 
 
 [WEBAPP]: https://gitlab.com/mentorgg/Frontend/mentor-gg-WebApp
-[MATCHSELECTIONHELPER]: https://gitlab.com/mentorgg/engine/matchselectionhelper
-[MATCHRETRIEVER]: https://gitlab.com/mentorgg/engine/matchretriever
-[TEAMMATCHRETRIEVER]: https://gitlab.com/mentorgg/engine/teammatchretriever
-[TEAMMANAGER]: https://gitlab.com/mentorgg/engine/teammanager
+[MATCHSELECTIONHELPER]: https://gitlab.com/mentorgg/csgo/matchselectionhelper
+[MATCHRETRIEVER]: https://gitlab.com/mentorgg/csgo/matchretriever
+[TEAMMATCHRETRIEVER]: https://gitlab.com/mentorgg/csgo/teammatchretriever
+[TEAMMANAGER]: https://gitlab.com/mentorgg/csgo/teammanager
