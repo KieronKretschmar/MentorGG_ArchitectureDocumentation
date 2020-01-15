@@ -1,10 +1,13 @@
 # Match selection
-Analyses displayed in the webapp usually depend on data of one or multiple matches. For example, some analyses may require data "from the user's last match", or data "from the user's last 10 matchmaking matches on de_mirage". Here explained is the process of how those matches, more precisely their related matchids, are identified. 
+Analyses displayed in the webapp usually depend on data of one or multiple matches.
+For example, some analyses may require data "from the user's last match", or data "from the user's last 10 matchmaking matches on de_mirage". 
+Here explained is the process of how those matches, more precisely their related matchids, are identified. 
 
 ## Information Flow
 
 ### Summary
-`MatchSelectionHelper` supplies `WebApp` with the data it needs to compute the required Matchids client-side. The `WebApp` then request data specifically for these MatchIds from `MatchRetriever` or `TeamMatchRetriever`, respectively.
+[MatchSelectionHelper][MATCHSELECTIONHELPER] supplies [WebApp][WEBAPP] with the data it needs to compute the required Matchids client-side. 
+The [WebApp][WEBAPP] then request data specifically for these MatchIds from [MatchRetriever][MATCHRETRIEVER] or [TeamMatchRetriever][TEAMMATCHRETRIEVER], respectively.
 
 ### Terminology
 - `MMH`: MetaMatchHistory, a list where each entry contains metadata about a match played by the user/team. Each matches metadata contains properties like 
@@ -15,7 +18,7 @@ Analyses displayed in the webapp usually depend on data of one or multiple match
 ### Single Player
 ```mermaid
 sequenceDiagram
-    participant WA as User/WebApp
+    participant WA as WebApp
     participant MSH as MatchSelectionHelper
     participant MR as MatchRetriever
 
@@ -30,7 +33,7 @@ sequenceDiagram
 ### Teams
 ```mermaid
 sequenceDiagram
-    participant WA as User/WebApp
+    participant WA as WebApp
     participant TM as TeamManager
     participant TMR as TeamMatchRetriever
 
@@ -54,4 +57,12 @@ sequenceDiagram
 - The user's selection and the matchIds are always in sync (no room for bugs where data of other matches than the user expected is returned).
 
 ### Disadvantages
+- We might need to implement an endpoint for GetMatches at some point, leading to code duplication
 - More traffic (60kb to 60mb per visit, depending on how well you do math)
+
+
+[WEBAPP]: https://gitlab.com/mentorgg/Frontend/mentor-gg-WebApp
+[MATCHSELECTIONHELPER]: https://gitlab.com/mentorgg/engine/matchselectionhelper
+[MATCHRETRIEVER]: https://gitlab.com/mentorgg/engine/matchretriever
+[TEAMMATCHRETRIEVER]: https://gitlab.com/mentorgg/engine/teammatchretriever
+[TEAMMANAGER]: https://gitlab.com/mentorgg/engine/teammanager
