@@ -1,5 +1,5 @@
 # Match selection
-Analyses displayed in the webapp usually depend on data of one or multiple matches.
+Analysis displayed in the webapp usually depends on data from one or multiple matches.
 For example, some analyses may require data "from the user's last match", or data "from the user's last 10 matchmaking matches on de_mirage". 
 Here explained is the process of how those matches, more precisely their related matchids, are identified. 
 
